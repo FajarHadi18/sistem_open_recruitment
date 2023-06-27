@@ -1,5 +1,35 @@
 <script setup>
 
+//import ref and onMounted
+import { ref, onMounted } from 'vue';
+
+//import api
+import api from '../api';
+
+//define state
+const kepanitiaans = ref([]);
+
+//method fetchDataPosts
+const fetchDataPosts = async () => {
+
+  //fetch data 
+  await api.get(`/api/kepanitiaans`)
+
+    .then(response => {
+
+      //set response data to state "posts"
+      kepanitiaans.value = response.data.data.data
+
+    });
+}
+
+//run hook "onMounted"
+onMounted(() => {
+
+  //call method "fetchDataPosts"
+  fetchDataPosts();
+});
+
 </script>
 
 <template>
@@ -41,66 +71,13 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="cards-wrapper justify-content-center" style="display: flex">
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
+              <div class="card h-100 m-3 p-2 rounded-5" v-for="(kepanitiaan, index) in kepanitiaans" :key="index" style="width: calc(100%/3);">
                 <div class="card-body">
-                  <h5 class="card-title">ITSA Volly</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <h5 class="card-title">{{ kepanitiaan.nama }}</h5>
+                  <p class="card-text">{{ kepanitiaan.deskripsi }}</p>
                   <div class="d-md-flex justify-content-md-end">
-                    <router-link :to="{ name: 'posts.detail' }" class="btn text-dark me-md-2"
-                      style="background-color: #FFC26F;">Daftar</router-link>
-                  </div>
-                </div>
-              </div>
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
-                <div class="card-body">
-                  <h5 class="card-title">ITSA Berbagi</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <div class="d-md-flex justify-content-md-end">
-                    <a href="#" class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="cards-wrapper justify-content-center" style="display: flex">
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
-                <div class="card-body">
-                  <h5 class="card-title">ITSA Volly</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <div class="d-md-flex justify-content-md-end">
-                    <a href="#" class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
-                <div class="card-body">
-                  <h5 class="card-title">ITSA Berbagi</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <div class="d-md-flex justify-content-md-end">
-                    <a href="#" class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="cards-wrapper justify-content-center" style="display: flex">
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
-                <div class="card-body">
-                  <h5 class="card-title">ITSA Volly</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <div class="d-md-flex justify-content-md-end">
-                    <a href="#" class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card h-100 m-3 p-2 rounded-5" style="width: calc(100%/3);">
-                <div class="card-body">
-                  <h5 class="card-title">ITSA Berbagi</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <div class="d-md-flex justify-content-md-end">
-                    <a href="#" class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</a>
+                    <router-link :to="{ name: 'kepanitiaans.index', params: { id: kepanitiaan.id } }"
+                      class="btn text-dark me-md-2" style="background-color: #FFC26F;">Daftar</router-link>
                   </div>
                 </div>
               </div>

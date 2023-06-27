@@ -15,7 +15,6 @@
                         Dengan ini Pengurus ITSA Periode 2022/2023 memberitahukan bahwa akan diselenggarakan perekrutan
                         anggota panitia "IOT 2023", dan seluruh anggota ITSA Generasi 19, 20 dan 21 dapat mengikuti
                         kepanitian ini.
-
                     </p>
                 </div>
             </div>

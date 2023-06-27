@@ -27,7 +27,12 @@ const routes = [
         path: '/detail',
         name: 'posts.detail',
         component: () => import( /* webpackChunkName: "edit" */ '../views/posts/detail.vue')
-    }
+    },
+    {
+        path: '/kepanitiaans/index/:id',
+        name: 'kepanitiaans.index',
+        component: () => import( /* webpackChunkName: "edit" */ '../views/kepanitiaans/index.vue')
+    },
 ]
 
 //create router
